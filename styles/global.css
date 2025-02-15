@@ -106,3 +106,10 @@
       'Noto Sans TC', sans-serif;
   }
 }
+
+@layer utilities {
+  .font-datk6 {
+    font-family: 'datk6';
+    font-weight: 600;
+  }
+}
