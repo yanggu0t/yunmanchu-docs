@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react';
 import { Noto_Sans_TC } from 'next/font/google';
-import { Banner } from 'fumadocs-ui/components/banner';
 import { RootProvider } from 'fumadocs-ui/provider';
 import { GeistSans } from 'geist/font/sans';
 
@@ -20,10 +19,14 @@ export default function Layout({ children }: { children: ReactNode }) {
       suppressHydrationWarning
     >
       <body className="flex min-h-screen flex-col">
-        <RootProvider>
-          <Banner id="announcement" variant="rainbow">
-            123
-          </Banner>
+        <RootProvider
+          search={{
+            options: {
+              delayMs: 500,
+              allowClear: true,
+            },
+          }}
+        >
           {children}
         </RootProvider>
       </body>
