@@ -7,6 +7,8 @@ import { GeistSans } from 'geist/font/sans';
 
 import '@/styles/global.css';
 
+import { ScrollToTop } from '@/components/web/scroll-to-top';
+
 const notoSansTC = Noto_Sans_TC({
   subsets: ['latin'],
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
@@ -51,6 +53,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         >
           {children}
         </RootProvider>
+        <ScrollToTop />
       </body>
     </html>
   );
