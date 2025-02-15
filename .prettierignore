@@ -1,0 +1,8 @@
+.next
+.git
+.cache
+.source
+node_modules
+public
+build
+dist

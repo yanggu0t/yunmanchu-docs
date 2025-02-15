@@ -1,0 +1,13 @@
+@import "tailwindcss";
+@import "fumadocs-ui/css/neutral.css";
+@import "fumadocs-ui/css/preset.css";
+
+@source '../node_modules/fumadocs-ui/dist/**/*.js';
+
+@layer base {
+  body {
+    font-family:
+      var(--font-geist-sans), var(--font-noto-sans-tc), "GeistSans",
+      "Noto Sans TC", sans-serif;
+  }
+}
