@@ -1,8 +1,9 @@
+import * as line from '@line/bot-sdk';
+import { ObjectId } from 'mongodb';
+
 import { env } from '../config/env';
 import { templates } from '../messages/templates';
 import { collections, updateAnnouncement } from './db';
-import * as line from '@line/bot-sdk';
-import { ObjectId } from 'mongodb';
 
 // LINE Client 設定
 const config = {

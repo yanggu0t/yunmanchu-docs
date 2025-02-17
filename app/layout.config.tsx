@@ -1,5 +1,6 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 import {
+  BedDouble,
   Calendar,
   CheckCircle,
   Coffee,
@@ -32,10 +33,16 @@ export const baseOptions: BaseLayoutProps = {
           url: '/docs/introductions/about',
         },
         {
-          icon: <Home />,
+          icon: <BedDouble />,
           text: '房間介紹',
           description: '了解我們特色房型的獨特魅力',
           url: '/docs/introductions/rooms',
+        },
+        {
+          icon: <Home />,
+          text: '公共空間',
+          description: '體驗我們的公共設施與蔬食早餐',
+          url: '/docs/introductions/public',
         },
       ],
     },

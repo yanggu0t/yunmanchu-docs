@@ -2,12 +2,12 @@ import type { ReactNode } from 'react';
 import { Noto_Sans_TC } from 'next/font/google';
 import Script from 'next/script';
 import { RootProvider } from 'fumadocs-ui/provider';
-import { SearchDialog } from '@/components/fumadocs/SearchDialog';
 import { GeistSans } from 'geist/font/sans';
 
-import '@/styles/global.css';
-
+import { SearchDialog } from '@/components/fumadocs/dialog';
 import { ScrollToTop } from '@/components/web/scroll-to-top';
+
+import '@/styles/global.css';
 
 const notoSansTC = Noto_Sans_TC({
   subsets: ['latin'],
@@ -53,6 +53,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         >
           {children}
         </RootProvider>
+
         <ScrollToTop />
       </body>
     </html>

@@ -4,6 +4,7 @@ import { useState, type ReactNode } from 'react';
 import { useDocsSearch } from 'fumadocs-core/search/client';
 import { useOnChange } from 'fumadocs-core/utils/use-on-change';
 import { useI18n } from 'fumadocs-ui/provider';
+
 import {
   SearchDialog,
   TagsList,

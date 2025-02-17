@@ -1,6 +1,7 @@
+import { ReviewsResponse } from '@/types/reviews';
+
 import { env } from '../config/env';
 import { j, publicProcedure } from '../jstack';
-import { ReviewsResponse } from '@/types/reviews';
 
 const path = `https://featurable.com/api/v1/accounts/${env.FEATURABLE_ACCOUNT_ID}/locations/${env.FEATURABLE_LOCATION_ID}/reviews?apiKey=${env.FEATURABLE_API_KEY}`;
 

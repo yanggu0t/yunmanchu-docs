@@ -13,8 +13,6 @@ import { useRouter } from 'next/navigation';
 import type { SortedResult } from 'fumadocs-core/server';
 import { useEffectEvent } from 'fumadocs-core/utils/use-effect-event';
 import { useI18n, useSidebar } from 'fumadocs-ui/provider';
-import { buttonVariants } from '../ui/button';
-import { cn } from '@/lib/utils';
 import {
   Dialog,
   DialogContent,
@@ -23,6 +21,10 @@ import {
 } from '@radix-ui/react-dialog';
 import { cva } from 'class-variance-authority';
 import { FileText, Hash, Loader2, SearchIcon, Text } from 'lucide-react';
+
+import { cn } from '@/lib/utils';
+
+import { buttonVariants } from '../ui/button';
 
 export type SearchLink = [name: string, href: string];
 
@@ -158,22 +160,12 @@ function SearchResults({
     sidebar.setOpen(false);
   };
 
-  const [isComposing, setIsComposing] = useState(false);
-
   const onKey = useEffectEvent((e: KeyboardEvent) => {
-    if (e.type === 'compositionstart') {
-      setIsComposing(true);
+    if (e.isComposing) {
       return;
     }
 
-    if (e.type === 'compositionend') {
-      setIsComposing(false);
-      return;
-    }
-
-    if (isComposing) return; // 🛑 如果還在組字，不處理鍵盤事件
-
-    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+    if (e.key === 'ArrowDown' || e.key == 'ArrowUp') {
       setActive((cur) => {
         const idx = items.findIndex((item) => item.id === cur);
         if (idx === -1) return items.at(0)?.id;
@@ -192,25 +184,6 @@ function SearchResults({
       e.preventDefault();
     }
   });
-
-  useEffect(() => {
-    const handleComposition = (e: CompositionEvent) => {
-      onKey(e as unknown as KeyboardEvent);
-    };
-    const handleKeyDown = (e: KeyboardEvent) => {
-      onKey(e);
-    };
-
-    document.addEventListener('compositionstart', handleComposition);
-    document.addEventListener('compositionend', handleComposition);
-    document.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      document.removeEventListener('compositionstart', handleComposition);
-      document.removeEventListener('compositionend', handleComposition);
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
 
   useEffect(() => {
     window.addEventListener('keydown', onKey);

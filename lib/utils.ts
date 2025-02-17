@@ -1,7 +1,8 @@
 import { SortedResult } from 'fumadocs-core/server';
-import { source } from '@/lib/source';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+
+import { source } from '@/lib/source';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

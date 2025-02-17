@@ -3,15 +3,159 @@ title: 入住須知
 description: 入住相關規定與注意事項
 ---
 
-## Code Block
+# 住宿周邊
 
-```js
-console.log('Hello World');
+## 入住與退房時間
+
+- 入住時間：15:00 至 20:00
+- 退房時間：09:00 至 11:00
+
+## 浴室 / 洗滌服務
+
+<FeatureTable
+  variant="facilities"
+  facilities={[
+    { name: '乾濕分離', available: true },
+    { name: '洗澡椅', available: true, note: '提供年長者使用' },
+    { name: '洗烘衣機', available: true },
+  ]}
+/>
+
+## 戶外 / 園藝
+
+<FeatureTable
+  variant="facilities"
+  facilities={[
+    { name: '花園/中庭', available: true, note: '提供戶外休憩空間' },
+    { name: '戶外休息區', available: true },
+    { name: '手做苔球課程', available: true, note: '需提前預約' },
+    { name: '多肉組合課程', available: true, note: '需提前預約' },
+  ]}
+/>
+
+## 兒童友善
+
+<FeatureTable
+  variant="facilities"
+  facilities={[
+    { name: '嬰兒床', available: true, note: '需提前告知' },
+    { name: '兒童玩具', available: true },
+    { name: '閱讀環境', available: true, note: '提供繪本玩具與書籍' },
+  ]}
+/>
+
+## 迷你吧 / 飲食
+
+<FeatureTable
+  variant="facilities"
+  facilities={[
+    { name: '飲水機', available: true },
+    { name: '烘碗機', available: true },
+    { name: '蔬食早餐', available: true, note: '未提供葷食' },
+  ]}
+/>
+
+## 網路服務
+
+<FeatureTable
+  variant="facilities"
+  facilities={[
+    { name: 'Wi-Fi', available: true },
+    { name: '有線網路', available: false },
+  ]}
+/>
+
+### Wi-Fi
+
+##### 名稱
+
+```
+CHT1687
 ```
 
-## Cards
+##### 密碼
 
-<Cards>
-  <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />
-  <Card title="Learn more about Fumadocs" href="https://fumadocs.vercel.app" />
-</Cards>
+```
+037225751
+```
+
+## 其他設施
+
+<FeatureTable
+  variant="facilities"
+  facilities={[
+    { name: '停車場', available: true },
+    {
+      name: '無障礙設施',
+      available: true,
+      note: '民宿全部房間皆在一樓，無樓梯',
+    },
+    { name: '吸菸', available: false, note: '民宿全館禁菸' },
+  ]}
+/>
+
+## 付款方式
+
+<FeatureTable
+  variant="facilities"
+  facilities={[
+    { name: '現金付款', available: true },
+    { name: '銀行轉帳', available: true },
+    { name: '信用卡付款', available: true },
+    {
+      name: '行動支付',
+      available: false,
+      note: '如：LINE PAY、街口支付',
+    },
+  ]}
+/>
+
+## 語言服務
+
+<FeatureTable
+  variant="facilities"
+  facilities={[
+    { name: '中文', available: true },
+    { name: '英文', available: false, note: '需透過手機翻譯，無法流利溝通' },
+  ]}
+/>
+
+## 住宿周邊景點
+
+<FeatureTable
+  variant="locations"
+  locations={[
+    { name: '苗栗特色館', distance: 0.6 },
+    { name: '火炎山生態教育館', distance: 13 },
+    { name: '三義木雕博物館', distance: 11 },
+    { name: '龍騰斷橋', distance: 15 },
+  ]}
+/>
+
+## 餐廳與飲料店
+
+<FeatureTable
+  variant="locations"
+  locations={[
+    {
+      name: '鵝家庄',
+      link: 'https://maps.app.goo.gl/FTbrPqVsb2UYDrkA6',
+      distance: 0.29,
+    },
+    { name: '陶之飲', distance: 2.5 },
+    { name: '棗莊', distance: 1.6 },
+    { name: '紅棗食府', distance: 1.1 },
+    { name: '福樂麵店', distance: 1.5 },
+  ]}
+/>
+
+## 大眾運輸
+
+<FeatureTable
+  variant="locations"
+  locations={[
+    { name: '銅鑼火車站', distance: 6.4 },
+    { name: '苗栗火車站', distance: 12.3 },
+    { name: '苗栗高鐵站', distance: 16.6 },
+  ]}
+/>

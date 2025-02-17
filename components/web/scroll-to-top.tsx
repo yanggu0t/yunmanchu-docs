@@ -1,9 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { BlurFade } from '@/components/magicui/blur-fade';
-import { Button } from '@/components/ui/button';
 import { ArrowUp } from 'lucide-react';
+
+import { BlurFade } from '@/components/ui/blur-fade';
+import { Button } from '@/components/ui/button';
 
 export const ScrollToTop = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);

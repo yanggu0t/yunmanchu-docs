@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 import {
   DocsBody,
@@ -7,7 +8,10 @@ import {
   DocsPage,
   DocsTitle,
 } from 'fumadocs-ui/page';
+
 import { source } from '@/lib/source';
+import { FeatureTable } from '@/components/fumadocs/feature-table';
+import { ImageCarousel } from '@/components/web/image-carousel';
 
 export default async function Page(props: {
   params: Promise<{ slug?: string[] }>;
@@ -27,6 +31,10 @@ export default async function Page(props: {
           components={{
             ...defaultMdxComponents,
             img: (props) => <ImageZoom {...props} />,
+            Step,
+            Steps,
+            FeatureTable,
+            ImageCarousel,
           }}
         />
       </DocsBody>

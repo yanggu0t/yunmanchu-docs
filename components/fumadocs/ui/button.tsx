@@ -17,5 +17,5 @@ export const buttonVariants = cva(
         icon: 'p-1.5 [&_svg]:size-5',
       },
     },
-  },
+  }
 );

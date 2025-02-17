@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+
 import { filterSearchResults, normalize } from '@/lib/utils';
 
 // export const { GET } = createFromSource(source);

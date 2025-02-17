@@ -1,7 +1,9 @@
+import { z } from 'zod';
+
+import type { AnnouncementRequest } from '@/types/announcement';
+
 import { j, publicProcedure } from '../jstack';
 import { getAnnouncement, updateAnnouncement } from '../lib/db';
-import type { AnnouncementRequest } from '@/types/announcement';
-import { z } from 'zod';
 
 export const announcementRouter = j.router({
   recent: publicProcedure.query(async ({ c }) => {

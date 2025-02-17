@@ -1,5 +1,6 @@
-import { EnvType } from './config/env';
 import { jstack } from 'jstack';
+
+import { EnvType } from './config/env';
 
 interface Env {
   Bindings: EnvType;
