@@ -28,6 +28,7 @@
     "mongodb": "^6.13.0",
     "motion": "^12.4.3",
     "next": "15.1.6",
+    "posthog-js": "^1.222.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "superjson": "^2.2.1",
