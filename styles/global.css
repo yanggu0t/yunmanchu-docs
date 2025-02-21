@@ -99,6 +99,12 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  *::-webkit-scrollbar {
+    display: none;
   }
 
   html {
@@ -120,13 +126,3 @@
     font-weight: 600;
   }
 }
-
-@import 'tailwindcss';
-@plugin "tailwindcss-animate";
-
-@import './theme.css';
-@import 'fumadocs-ui/css/preset.css';
-
-@source '../node_modules/fumadocs-ui/dist/**/*.js';
-
-@custom-variant dark (&:is(.dark *));

@@ -71,7 +71,7 @@ export const ImageCarousel = ({
           <button
             key={index}
             className={cn(
-              'size-2.5 rounded-full transition-colors duration-200',
+              'size-2 rounded-full transition-colors duration-200',
               current - 1 === index
                 ? 'bg-foreground dark:bg-white'
                 : 'bg-muted-foreground/30 hover:bg-muted-foreground/70 dark:bg-muted-foreground/50 dark:hover:bg-muted-foreground/80'
