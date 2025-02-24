@@ -1,8 +1,23 @@
 import Link from 'next/link';
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from '@tanstack/react-query';
 
-export default function HomePage() {
+import { Container } from '@/components/web/page-container';
+import { ReviewMarquee } from '@/components/web/review-marquee';
+import { getAllReviews } from '@/service/reviews';
+
+export default async function HomePage() {
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery({
+    queryKey: ['get-reviews'],
+    queryFn: getAllReviews,
+  });
+
   return (
-    <main className="flex flex-1 flex-col justify-center text-center">
+    <Container className="flex flex-1 flex-col justify-center text-center">
       <h1 className="mb-4 text-2xl font-bold">Hello World</h1>
       <p className="text-fd-muted-foreground">
         You can open{' '}
@@ -14,6 +29,10 @@ export default function HomePage() {
         </Link>{' '}
         and see the documentation.
       </p>
-    </main>
+
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <ReviewMarquee className="border-muted-foreground rounded-xl border" />
+      </HydrationBoundary>
+    </Container>
   );
 }
