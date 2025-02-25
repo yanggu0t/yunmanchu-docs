@@ -11,7 +11,7 @@ export const Container = ({ children, className }: PageProps) => {
   return (
     <main
       className={cn(
-        'flex flex-1 flex-col items-center justify-center text-center',
+        'mx-auto flex max-w-7xl flex-1 flex-col justify-center text-center',
         className
       )}
     >

@@ -31,7 +31,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           strategy="afterInteractive"
         />
       </head>
-      <body className="mx-auto flex min-h-screen max-w-7xl flex-col">
+      <body className="flex min-h-screen flex-col">
         <PostHogProvider>
           <QueryProvider>
             <RootProvider
