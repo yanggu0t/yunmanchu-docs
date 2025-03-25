@@ -16,7 +16,7 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
       capture_pageview: false,
       debug: !isProduction, // Disable automatic pageview capture, as we capture manually
     });
-  }, []);
+  }, [isProduction]);
 
   return (
     <PHProvider client={posthog}>

@@ -140,9 +140,6 @@
   }
 }
 
-@layer utilities {
-  .font-datk6 {
-    font-family: 'datk6';
-    font-weight: 600;
-  }
+button[aria-label='Choose a language'] {
+  @apply hidden;
 }

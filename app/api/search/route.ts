@@ -1,13 +1,18 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { createFromSource } from 'fumadocs-core/search/server';
+import { createTokenizer } from '@orama/tokenizers/mandarin';
 
-import { filterSearchResults, normalize } from '@/lib/utils';
+import { source } from '@/lib/source';
 
-// export const { GET } = createFromSource(source);
-
-export async function GET(req: NextRequest) {
-  const query = normalize(req.nextUrl.searchParams.get('query') ?? '');
-
-  const results = filterSearchResults(query);
-
-  return NextResponse.json(results);
-}
+export const { GET } = createFromSource(source, undefined, {
+  localeMap: {
+    zh: {
+      components: {
+        tokenizer: createTokenizer(),
+      },
+      search: {
+        threshold: 0,
+        tolerance: 0,
+      },
+    },
+  },
+});

@@ -10,6 +10,8 @@ import {
   MapPinned,
 } from 'lucide-react';
 
+import { i18n } from '@/lib/i18n';
+
 /**
  * Shared layout configurations
  *
@@ -18,6 +20,7 @@ import {
  * Docs Layout: app/docs/layout.tsx
  */
 export const baseOptions: BaseLayoutProps = {
+  i18n,
   nav: {
     title: '蘊慢築民宿',
   },
