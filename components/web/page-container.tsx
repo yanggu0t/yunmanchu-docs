@@ -1,34 +1,12 @@
 import React from 'react';
 
-import { cn } from '@/lib/utils';
-
-interface PageProps {
-  className?: string;
-  children: React.ReactNode;
-}
-
-export const Container = ({ children, className }: PageProps) => {
+export const Container = ({
+  children,
+  ...props
+}: React.ComponentPropsWithoutRef<'main'>) => {
   return (
-    <main
-      className={cn(
-        'mx-auto flex max-w-7xl flex-1 flex-col justify-center text-center',
-        className
-      )}
-    >
+    <main className="flex flex-1 flex-col items-center" {...props}>
       {children}
     </main>
-  );
-};
-
-export const Wrapper = ({ children, className }: PageProps) => {
-  return (
-    <div
-      className={cn(
-        'flex max-w-[1080px] min-w-[250px] flex-col items-center justify-center',
-        className
-      )}
-    >
-      {children}
-    </div>
   );
 };
