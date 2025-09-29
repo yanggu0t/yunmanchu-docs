@@ -21,7 +21,7 @@ export const Section = ({
   return (
     <section
       className={cn(
-        'mx-auto max-w-7xl px-4 py-8 sm:px-8 sm:py-10 lg:px-16',
+        'mx-auto w-full max-w-7xl overflow-hidden px-3 py-8 sm:px-8 sm:py-10 lg:px-16',
         className
       )}
       {...props}
