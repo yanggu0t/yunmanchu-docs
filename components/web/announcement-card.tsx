@@ -25,6 +25,22 @@ function AnnouncementCardContent({
   className,
   position = 'top-center',
 }: AnnouncementCardProps) {
+  // 在手機版強制使用 top-center
+  const [actualPosition, setActualPosition] = useState(position);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      if (window.innerWidth < 640) {
+        setActualPosition('top-center');
+      } else {
+        setActualPosition(position);
+      }
+    };
+
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, [position]);
   const { data: announcement, isLoading, error } = useAnnouncement();
   const [isDismissed, setIsDismissed] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -58,16 +74,16 @@ function AnnouncementCardContent({
   };
 
   const positionClasses = {
-    'top-center': 'top-4 left-1/2 -translate-x-1/2',
+    'top-center': 'top-4 left-1/2 transform -translate-x-1/2',
     'top-right': 'top-4 right-4',
     'bottom-right': 'bottom-4 right-4',
   };
 
   const animationVariants = {
     'top-center': {
-      initial: { opacity: 0, y: -50, x: '-50%' },
-      animate: { opacity: 1, y: 0, x: '-50%' },
-      exit: { opacity: 0, y: -50, x: '-50%' },
+      initial: { opacity: 0, y: -50 },
+      animate: { opacity: 1, y: 0 },
+      exit: { opacity: 0, y: -50 },
     },
     'top-right': {
       initial: { opacity: 0, x: 100 },
@@ -86,13 +102,17 @@ function AnnouncementCardContent({
       {isVisible && !isDismissed && (
         <motion.div
           key="announcement-card"
-          {...animationVariants[position]}
+          {...animationVariants[actualPosition]}
           transition={{
             type: 'spring',
             stiffness: 500,
             damping: 30,
           }}
-          className={cn('fixed z-[100]', positionClasses[position], className)}
+          className={cn(
+            'fixed z-[100]',
+            positionClasses[actualPosition],
+            className
+          )}
         >
           <div
             className={cn(
@@ -111,18 +131,18 @@ function AnnouncementCardContent({
             </div>
 
             {/* Content */}
-            <div className="relative px-6 py-5">
+            <div className="relative px-4 py-3 sm:px-6 sm:py-5">
               {/* Header */}
-              <div className="mb-3 flex items-start justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="rounded-full bg-green-100 p-2 dark:bg-green-800/50">
-                    <Megaphone className="h-5 w-5 text-green-600 dark:text-green-400" />
+              <div className="mb-2 flex items-start justify-between sm:mb-3">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <div className="rounded-full bg-green-100 p-1.5 sm:p-2 dark:bg-green-800/50">
+                    <Megaphone className="h-4 w-4 text-green-600 sm:h-5 sm:w-5 dark:text-green-400" />
                   </div>
                   <div>
-                    <h3 className="text-sm font-semibold text-green-900 dark:text-green-100">
+                    <h3 className="text-xs font-semibold text-green-900 sm:text-sm dark:text-green-100">
                       最新公告
                     </h3>
-                    <p className="text-xs text-green-600 dark:text-green-400">
+                    <p className="text-[10px] text-green-600 sm:text-xs dark:text-green-400">
                       {new Date().toLocaleDateString('zh-TW')}
                     </p>
                   </div>
@@ -143,7 +163,7 @@ function AnnouncementCardContent({
 
               {/* Message */}
               <div className="space-y-2">
-                <p className="text-sm leading-relaxed text-green-800 dark:text-green-200">
+                <p className="text-xs leading-relaxed text-green-800 sm:text-sm dark:text-green-200">
                   {announcement.announcement}
                 </p>
               </div>

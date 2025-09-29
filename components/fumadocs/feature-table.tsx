@@ -17,7 +17,6 @@ interface Facility extends Common {
 interface Location extends Common {
   name: string;
   distance: number;
-  stars?: number;
 }
 
 type FeatureTableProps =
@@ -66,9 +65,6 @@ export function FeatureTable(props: FeatureTableProps) {
             {props.variant === 'locations' && (
               <th className={thStyles}>距離</th>
             )}
-            {props.variant === 'locations' && (
-              <th className={thStyles}>推薦指數</th>
-            )}
           </tr>
         </thead>
         <tbody>
@@ -97,7 +93,7 @@ export function FeatureTable(props: FeatureTableProps) {
               </tr>
             ))}
           {props.variant === 'locations' &&
-            props.locations.map(({ name, distance, stars, note, link }) => (
+            props.locations.map(({ name, distance, note, link }) => (
               <tr key={name}>
                 <td className={tdStyles}>
                   <div className={field()}>
@@ -122,7 +118,6 @@ export function FeatureTable(props: FeatureTableProps) {
                     ? `${distance * 1000} 公尺`
                     : `${distance} 公里`}
                 </td>
-                <td className={tdStyles}>{stars ? '⭐'.repeat(stars) : '-'}</td>
               </tr>
             ))}
         </tbody>

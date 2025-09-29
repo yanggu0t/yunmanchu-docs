@@ -2,7 +2,15 @@ import { Variants } from 'framer-motion';
 
 export interface ScrollRevealConfig {
   /** Animation type to use */
-  animation?: 'fadeIn' | 'slideUp' | 'slideDown' | 'slideLeft' | 'slideRight' | 'scale' | 'scaleDown' | 'rotateIn';
+  animation?:
+    | 'fadeIn'
+    | 'slideUp'
+    | 'slideDown'
+    | 'slideLeft'
+    | 'slideRight'
+    | 'scale'
+    | 'scaleDown'
+    | 'rotateIn';
   /** Custom animation variants */
   variants?: Variants;
   /** Delay before animation starts (in seconds) */

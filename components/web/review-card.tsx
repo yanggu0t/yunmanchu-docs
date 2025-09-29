@@ -45,7 +45,7 @@ export const ReviewCard = ({ isLoading, ...props }: ReviewCardProps) => {
       whileTap={{ scale: 0.98 }}
       transition={{ type: 'spring', stiffness: 400, damping: 17 }}
       className={cn(
-        'relative h-full w-full min-w-[calc(100vw-8rem)] max-w-[calc(100vw-6rem)] cursor-pointer overflow-hidden rounded-xl border p-4 select-none hover:bg-gray-950/[.05] xs:min-w-[240px] xs:max-w-[280px] sm:min-w-[280px] sm:max-w-[320px] lg:min-w-[300px] lg:max-w-[360px] dark:hover:bg-gray-50/[.15]',
+        'xs:min-w-[240px] xs:max-w-[280px] relative h-full w-full max-w-[calc(100vw-6rem)] min-w-[calc(100vw-8rem)] cursor-pointer overflow-hidden rounded-xl border p-4 select-none hover:bg-gray-950/[.05] sm:max-w-[320px] sm:min-w-[280px] lg:max-w-[360px] lg:min-w-[300px] dark:hover:bg-gray-50/[.15]',
         // light styles
         'border-gray-950/[.1] bg-gray-950/[.01]',
         // dark styles
@@ -64,7 +64,7 @@ export const ReviewCard = ({ isLoading, ...props }: ReviewCardProps) => {
         <div className="flex flex-col gap-2">
           <figcaption
             className={cn(
-              'line-clamp-1 overflow-hidden text-start text-xs font-medium dark:text-white sm:text-sm md:text-base'
+              'line-clamp-1 overflow-hidden text-start text-xs font-medium sm:text-sm md:text-base dark:text-white'
             )}
           >
             {displayName}
@@ -84,7 +84,7 @@ export const ReviewCard = ({ isLoading, ...props }: ReviewCardProps) => {
       </div>
       <blockquote
         className={cn(
-          'mt-2 line-clamp-3 overflow-hidden text-start text-[11px] leading-relaxed sm:text-xs md:line-clamp-4 lg:line-clamp-6 md:text-sm'
+          'mt-2 line-clamp-3 overflow-hidden text-start text-[11px] leading-relaxed sm:text-xs md:line-clamp-4 md:text-sm lg:line-clamp-6'
         )}
       >
         {comment}
@@ -95,7 +95,7 @@ export const ReviewCard = ({ isLoading, ...props }: ReviewCardProps) => {
 
 const SkeletonReviewCard = () => {
   return (
-    <div className="relative h-full w-full min-w-[calc(100vw-8rem)] max-w-[calc(100vw-6rem)] overflow-hidden rounded-xl border p-4 xs:min-w-[240px] xs:max-w-[280px] sm:min-w-[280px] sm:max-w-[320px] lg:min-w-[300px] lg:max-w-[360px]">
+    <div className="xs:min-w-[240px] xs:max-w-[280px] relative h-full w-full max-w-[calc(100vw-6rem)] min-w-[calc(100vw-8rem)] overflow-hidden rounded-xl border p-4 sm:max-w-[320px] sm:min-w-[280px] lg:max-w-[360px] lg:min-w-[300px]">
       <div className="flex flex-row items-center gap-2">
         <Skeleton className="size-9 rounded-full" />
         <div className="flex flex-col gap-2">

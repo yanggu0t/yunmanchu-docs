@@ -1,16 +1,14 @@
 'use client';
 
 import React from 'react';
-import { Search, Users, DollarSign } from 'lucide-react';
+import { DollarSign, Search, Users } from 'lucide-react';
 
+import { getPricingComparison } from '@/lib/room-data';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-
-// import { RoomCard, RoomSummary } from './room-card'; // Temporarily disabled for build stability
-import { getPricingComparison } from '@/lib/room-data';
 
 interface RoomsOverviewProps {
   layout?: 'cards' | 'list';
@@ -23,10 +21,12 @@ export function RoomsOverview({
   layout = 'cards',
   showFilters = true,
   showComparison = true,
-  className
+  className,
 }: RoomsOverviewProps) {
   const [searchTerm, setSearchTerm] = React.useState('');
-  const [selectedCapacity, setSelectedCapacity] = React.useState<number | null>(null);
+  const [selectedCapacity, setSelectedCapacity] = React.useState<number | null>(
+    null
+  );
   const [priceSort, setPriceSort] = React.useState<'asc' | 'desc' | null>(null);
 
   // Mock rooms list for demo (replace with actual data when available)
@@ -42,7 +42,7 @@ export function RoomsOverview({
   return (
     <div className={cn('space-y-8', className)}>
       {/* Header */}
-      <div className="text-center space-y-4">
+      <div className="space-y-4 text-center">
         <h2 className="text-3xl font-bold">房型總覽</h2>
         <p className="text-muted-foreground">
           選擇最適合您的房型，每個房間都有獨特的特色與舒適的環境
@@ -52,10 +52,10 @@ export function RoomsOverview({
       {/* Filters */}
       {showFilters && (
         <Card className="p-6">
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col gap-4 sm:flex-row">
             <div className="flex-1">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                <Search className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform" />
                 <Input
                   placeholder="搜尋房型..."
                   value={searchTerm}
@@ -69,17 +69,21 @@ export function RoomsOverview({
               <Button
                 variant={selectedCapacity === 4 ? 'default' : 'outline'}
                 size="sm"
-                onClick={() => setSelectedCapacity(selectedCapacity === 4 ? null : 4)}
+                onClick={() =>
+                  setSelectedCapacity(selectedCapacity === 4 ? null : 4)
+                }
               >
-                <Users className="w-4 h-4 mr-1" />
+                <Users className="mr-1 h-4 w-4" />
                 4人房
               </Button>
               <Button
                 variant={selectedCapacity === 6 ? 'default' : 'outline'}
                 size="sm"
-                onClick={() => setSelectedCapacity(selectedCapacity === 6 ? null : 6)}
+                onClick={() =>
+                  setSelectedCapacity(selectedCapacity === 6 ? null : 6)
+                }
               >
-                <Users className="w-4 h-4 mr-1" />
+                <Users className="mr-1 h-4 w-4" />
                 6人房
               </Button>
             </div>
@@ -90,15 +94,17 @@ export function RoomsOverview({
                 size="sm"
                 onClick={() => setPriceSort(priceSort === 'asc' ? null : 'asc')}
               >
-                <DollarSign className="w-4 h-4 mr-1" />
+                <DollarSign className="mr-1 h-4 w-4" />
                 價格低到高
               </Button>
               <Button
                 variant={priceSort === 'desc' ? 'default' : 'outline'}
                 size="sm"
-                onClick={() => setPriceSort(priceSort === 'desc' ? null : 'desc')}
+                onClick={() =>
+                  setPriceSort(priceSort === 'desc' ? null : 'desc')
+                }
               >
-                <DollarSign className="w-4 h-4 mr-1" />
+                <DollarSign className="mr-1 h-4 w-4" />
                 價格高到低
               </Button>
             </div>
@@ -109,32 +115,39 @@ export function RoomsOverview({
       {/* Pricing Comparison Table */}
       {showComparison && (
         <Card className="p-6">
-          <h3 className="text-lg font-semibold mb-4">價格比較表</h3>
+          <h3 className="mb-4 text-lg font-semibold">價格比較表</h3>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b">
-                  <th className="text-left py-2">房型</th>
-                  <th className="text-center py-2">人數</th>
-                  <th className="text-right py-2">平日</th>
-                  <th className="text-right py-2">假日</th>
-                  <th className="text-right py-2">過年</th>
-                  <th className="text-right py-2">平日/人</th>
+                  <th className="py-2 text-left">房型</th>
+                  <th className="py-2 text-center">人數</th>
+                  <th className="py-2 text-right">平日</th>
+                  <th className="py-2 text-right">假日</th>
+                  <th className="py-2 text-right">過年</th>
+                  <th className="py-2 text-right">平日/人</th>
                 </tr>
               </thead>
               <tbody>
                 {pricingComparison.map((room, index) => (
                   <tr key={index} className="border-b">
                     <td className="py-3 font-medium">{room.name}</td>
-                    <td className="text-center py-3">
+                    <td className="py-3 text-center">
                       <Badge variant="outline">
-                        {room.capacity}{room.maxCapacity && `~${room.maxCapacity}`}人
+                        {room.capacity}
+                        {room.maxCapacity && `~${room.maxCapacity}`}人
                       </Badge>
                     </td>
-                    <td className="text-right py-3">${room.pricing.weekday.toLocaleString()}</td>
-                    <td className="text-right py-3">${room.pricing.weekend.toLocaleString()}</td>
-                    <td className="text-right py-3">${room.pricing.lunar.toLocaleString()}</td>
-                    <td className="text-right py-3 text-muted-foreground">
+                    <td className="py-3 text-right">
+                      ${room.pricing.weekday.toLocaleString()}
+                    </td>
+                    <td className="py-3 text-right">
+                      ${room.pricing.weekend.toLocaleString()}
+                    </td>
+                    <td className="py-3 text-right">
+                      ${room.pricing.lunar.toLocaleString()}
+                    </td>
+                    <td className="text-muted-foreground py-3 text-right">
                       ${room.pricePerPerson.weekday.toLocaleString()}
                     </td>
                   </tr>
@@ -149,14 +162,14 @@ export function RoomsOverview({
       {layout === 'cards' ? (
         <div className="grid gap-8 lg:grid-cols-1 xl:grid-cols-2">
           {/* Room cards would be displayed here when room data is available */}
-          <div className="col-span-full text-center p-8 text-muted-foreground">
+          <div className="text-muted-foreground col-span-full p-8 text-center">
             房型卡片功能開發中，請查看上方的價格比較表
           </div>
         </div>
       ) : (
         <div className="space-y-4">
           {/* Room summaries would be displayed here when room data is available */}
-          <div className="text-center p-8 text-muted-foreground">
+          <div className="text-muted-foreground p-8 text-center">
             房型列表功能開發中，請查看上方的價格比較表
           </div>
         </div>
@@ -191,7 +204,7 @@ export function RoomsOverview({
 export function RoomSelector({
   selectedRoom,
   onRoomSelect,
-  className
+  className,
 }: {
   selectedRoom?: string;
   onRoomSelect?: (roomId: string) => void;
@@ -207,9 +220,9 @@ export function RoomSelector({
           <Card
             key={index}
             className={cn(
-              'p-4 cursor-pointer transition-all hover:shadow-md',
+              'cursor-pointer p-4 transition-all hover:shadow-md',
               selectedRoom === room.name
-                ? 'ring-2 ring-primary bg-primary/5'
+                ? 'ring-primary bg-primary/5 ring-2'
                 : 'hover:border-primary/50'
             )}
             onClick={() => onRoomSelect?.(room.name)}
@@ -218,16 +231,18 @@ export function RoomSelector({
               <div className="flex items-start justify-between">
                 <h5 className="font-medium">{room.name}</h5>
                 <Badge variant="outline" className="text-xs">
-                  <Users className="w-3 h-3 mr-1" />
+                  <Users className="mr-1 h-3 w-3" />
                   {room.capacity}人
                 </Badge>
               </div>
-              <p className="text-sm text-muted-foreground line-clamp-2">
+              <p className="text-muted-foreground line-clamp-2 text-sm">
                 基本{room.capacity}人入住，最多可容納{room.maxCapacity}人
               </p>
               <div className="text-sm">
                 <span className="text-muted-foreground">平日起 </span>
-                <span className="font-medium">${room.pricing.weekday.toLocaleString()}</span>
+                <span className="font-medium">
+                  ${room.pricing.weekday.toLocaleString()}
+                </span>
               </div>
             </div>
           </Card>

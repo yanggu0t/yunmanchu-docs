@@ -4,12 +4,12 @@ import React from 'react';
 import Image from 'next/image';
 import { ExternalLink, Users } from 'lucide-react';
 
+import type { CarouselImage } from '@/lib/images';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { ImageCarousel } from '@/components/web/image-carousel';
-import type { CarouselImage } from '@/lib/images';
 
 import { RoomFeatures, type RoomFeature } from './room-features';
 import { RoomPricing, type RoomPricingData } from './room-pricing';
@@ -43,7 +43,7 @@ export function RoomCard({
   layout = 'vertical',
   showPricing = true,
   showFeatures = true,
-  className
+  className,
 }: RoomCardProps) {
   const handleCTAClick = () => {
     if (room.cta?.url) {
@@ -58,7 +58,7 @@ export function RoomCard({
   if (layout === 'horizontal') {
     return (
       <Card className={cn('overflow-hidden', className)}>
-        <div className="grid md:grid-cols-2 gap-0">
+        <div className="grid gap-0 md:grid-cols-2">
           {/* Image Section */}
           <div className="relative">
             <ImageCarousel
@@ -69,7 +69,11 @@ export function RoomCard({
             {room.highlights && room.highlights.length > 0 && (
               <div className="absolute top-4 left-4 flex flex-wrap gap-2">
                 {room.highlights.map((highlight, index) => (
-                  <Badge key={index} variant="secondary" className="bg-white/90 text-primary">
+                  <Badge
+                    key={index}
+                    variant="secondary"
+                    className="text-primary bg-white/90"
+                  >
                     {highlight}
                   </Badge>
                 ))}
@@ -78,21 +82,25 @@ export function RoomCard({
           </div>
 
           {/* Content Section */}
-          <div className="p-6 space-y-6">
+          <div className="space-y-6 p-6">
             <div className="space-y-3">
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <h3 className="text-xl font-semibold">{room.name}</h3>
                   {room.subtitle && (
-                    <p className="text-sm text-muted-foreground mt-1">{room.subtitle}</p>
+                    <p className="text-muted-foreground mt-1 text-sm">
+                      {room.subtitle}
+                    </p>
                   )}
                 </div>
                 <Badge variant="outline" className="flex-shrink-0">
-                  <Users className="w-3 h-3 mr-1" />
+                  <Users className="mr-1 h-3 w-3" />
                   {room.pricing.capacity}人房
                 </Badge>
               </div>
-              <p className="text-muted-foreground leading-relaxed">{room.description}</p>
+              <p className="text-muted-foreground leading-relaxed">
+                {room.description}
+              </p>
             </div>
 
             {showPricing && (
@@ -105,7 +113,7 @@ export function RoomCard({
 
             {showFeatures && room.features.length > 0 && (
               <div className="space-y-3">
-                <h4 className="font-medium text-sm">房間特色</h4>
+                <h4 className="text-sm font-medium">房間特色</h4>
                 <RoomFeatures
                   features={room.features.slice(0, 4)}
                   layout="list"
@@ -121,7 +129,7 @@ export function RoomCard({
                 variant="default"
               >
                 {room.cta.text}
-                {room.cta.external && <ExternalLink className="w-4 h-4 ml-2" />}
+                {room.cta.external && <ExternalLink className="ml-2 h-4 w-4" />}
               </Button>
             )}
           </div>
@@ -136,14 +144,15 @@ export function RoomCard({
       <div className="space-y-0">
         {/* Image Section */}
         <div className="relative">
-          <ImageCarousel
-            images={room.images}
-            aspectRatio="aspect-[4/3]"
-          />
+          <ImageCarousel images={room.images} aspectRatio="aspect-[4/3]" />
           {room.highlights && room.highlights.length > 0 && (
             <div className="absolute top-4 left-4 flex flex-wrap gap-2">
               {room.highlights.map((highlight, index) => (
-                <Badge key={index} variant="secondary" className="bg-white/90 text-primary">
+                <Badge
+                  key={index}
+                  variant="secondary"
+                  className="text-primary bg-white/90"
+                >
                   {highlight}
                 </Badge>
               ))}
@@ -152,38 +161,36 @@ export function RoomCard({
         </div>
 
         {/* Content Section */}
-        <div className="p-6 space-y-6">
+        <div className="space-y-6 p-6">
           <div className="space-y-3">
             <div className="flex items-start justify-between gap-3">
               <div>
                 <h3 className="text-xl font-semibold">{room.name}</h3>
                 {room.subtitle && (
-                  <p className="text-sm text-muted-foreground mt-1">{room.subtitle}</p>
+                  <p className="text-muted-foreground mt-1 text-sm">
+                    {room.subtitle}
+                  </p>
                 )}
               </div>
               <Badge variant="outline" className="flex-shrink-0">
-                <Users className="w-3 h-3 mr-1" />
+                <Users className="mr-1 h-3 w-3" />
                 {room.pricing.capacity}人房
               </Badge>
             </div>
-            <p className="text-muted-foreground leading-relaxed">{room.description}</p>
+            <p className="text-muted-foreground leading-relaxed">
+              {room.description}
+            </p>
           </div>
 
           {showFeatures && room.features.length > 0 && (
             <div className="space-y-4">
               <h4 className="font-medium">房間特色</h4>
-              <RoomFeatures
-                features={room.features}
-                layout="grid"
-              />
+              <RoomFeatures features={room.features} layout="grid" />
             </div>
           )}
 
           {showPricing && (
-            <RoomPricing
-              roomName={room.name}
-              pricing={room.pricing}
-            />
+            <RoomPricing roomName={room.name} pricing={room.pricing} />
           )}
 
           {room.cta && (
@@ -193,7 +200,7 @@ export function RoomCard({
               variant="default"
             >
               {room.cta.text}
-              {room.cta.external && <ExternalLink className="w-4 h-4 ml-2" />}
+              {room.cta.external && <ExternalLink className="ml-2 h-4 w-4" />}
             </Button>
           )}
         </div>
@@ -206,7 +213,7 @@ export function RoomCard({
 export function RoomSummary({
   room,
   onClick,
-  className
+  className,
 }: {
   room: RoomCardData;
   onClick?: () => void;
@@ -215,13 +222,13 @@ export function RoomSummary({
   return (
     <Card
       className={cn(
-        'p-4 cursor-pointer transition-all hover:shadow-md hover:border-primary/50',
+        'hover:border-primary/50 cursor-pointer p-4 transition-all hover:shadow-md',
         className
       )}
       onClick={onClick}
     >
       <div className="flex items-center gap-4">
-        <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 relative">
+        <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-lg">
           <Image
             src={room.images[0]?.src || ''}
             alt={room.images[0]?.alt || room.name}
@@ -229,23 +236,25 @@ export function RoomSummary({
             className="object-cover"
           />
         </div>
-        <div className="flex-1 min-w-0">
+        <div className="min-w-0 flex-1">
           <div className="flex items-start justify-between gap-2">
             <div>
-              <h4 className="font-medium truncate">{room.name}</h4>
+              <h4 className="truncate font-medium">{room.name}</h4>
               {room.subtitle && (
-                <p className="text-xs text-muted-foreground mt-1">{room.subtitle}</p>
+                <p className="text-muted-foreground mt-1 text-xs">
+                  {room.subtitle}
+                </p>
               )}
             </div>
-            <Badge variant="outline" className="text-xs flex-shrink-0">
-              <Users className="w-3 h-3 mr-1" />
+            <Badge variant="outline" className="flex-shrink-0 text-xs">
+              <Users className="mr-1 h-3 w-3" />
               {room.pricing.capacity}人
             </Badge>
           </div>
-          <p className="text-sm text-muted-foreground mt-2 line-clamp-2">
+          <p className="text-muted-foreground mt-2 line-clamp-2 text-sm">
             {room.description}
           </p>
-          <div className="flex items-center justify-between mt-3">
+          <div className="mt-3 flex items-center justify-between">
             <div className="text-sm font-medium">
               平日 ${room.pricing.weekday.toLocaleString()}
             </div>

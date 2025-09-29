@@ -10,13 +10,15 @@ import {
 } from 'fumadocs-ui/page';
 
 import { source } from '@/lib/source';
+import {
+  PriceSummary,
+  PricingComparison,
+} from '@/components/ui/pricing-comparison';
+import { RoomFeatures } from '@/components/ui/room-features';
+import { RoomPricing } from '@/components/ui/room-pricing';
+import { RoomSelector, RoomsOverview } from '@/components/ui/rooms-overview';
 import { FeatureTable } from '@/components/fumadocs/feature-table';
 import { ImageCarousel } from '@/components/web/image-carousel';
-import { RoomPricing } from '@/components/ui/room-pricing';
-import { RoomFeatures } from '@/components/ui/room-features';
-import { RoomCard, RoomSummary } from '@/components/ui/room-card';
-import { RoomsOverview, RoomSelector } from '@/components/ui/rooms-overview';
-import { PricingComparison, PriceSummary } from '@/components/ui/pricing-comparison';
 
 export default async function Page(props: {
   params: Promise<{ lang: string; slug?: string[] }>;
@@ -42,8 +44,6 @@ export default async function Page(props: {
             ImageCarousel,
             RoomPricing,
             RoomFeatures,
-            RoomCard,
-            RoomSummary,
             RoomsOverview,
             RoomSelector,
             PricingComparison,

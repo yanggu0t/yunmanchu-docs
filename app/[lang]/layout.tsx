@@ -52,7 +52,6 @@ export default async function RootLayout({
                 ['入住須知', '/docs/guides/check_in'],
                 ['訂房須知', '/docs/guides/booking'],
                 ['交通方式', '/docs/guides/transport'],
-                ['體驗課程', '/docs/experiences'],
               ],
             }}
           >

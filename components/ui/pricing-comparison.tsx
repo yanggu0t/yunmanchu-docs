@@ -2,14 +2,18 @@
 
 import React from 'react';
 import NumberFlow from '@number-flow/react';
-import { Calendar, Users, TrendingDown } from 'lucide-react';
-
-import { cn } from '@/lib/utils';
-import { Badge } from '@/components/ui/badge';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { Calendar, TrendingDown, Users } from 'lucide-react';
 
 import { getPricingComparison, PRICING_RULES } from '@/lib/room-data';
+import {
+  cn,
+  formatCapacityRange,
+  PRICE_FORMAT_CONFIG,
+  type PricingPeriod,
+} from '@/lib/utils';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
 
 interface PricingComparisonProps {
   className?: string;
@@ -20,9 +24,10 @@ interface PricingComparisonProps {
 export function PricingComparison({
   className,
   showPerPersonPricing = true,
-  highlightBestValue = true
+  highlightBestValue = true,
 }: PricingComparisonProps) {
-  const [selectedPeriod, setSelectedPeriod] = React.useState<'weekday' | 'weekend' | 'lunar'>('weekday');
+  const [selectedPeriod, setSelectedPeriod] =
+    React.useState<PricingPeriod>('weekday');
   const pricingData = getPricingComparison();
 
   // Find best value (lowest price per person)
@@ -44,19 +49,19 @@ export function PricingComparison({
           <div className="flex items-center justify-between">
             <h3 className="text-xl font-semibold">房型價格比較</h3>
             <Badge variant="outline" className="flex items-center gap-1">
-              <Calendar className="w-3 h-3" />
+              <Calendar className="h-3 w-3" />
               即時價格
             </Badge>
           </div>
 
           {/* Period Selector */}
-          <div className="flex gap-1 p-1 bg-muted rounded-lg w-fit">
+          <div className="bg-muted flex w-fit gap-1 rounded-lg p-1">
             {Object.entries(PRICING_RULES.periods).map(([key, label]) => (
               <Button
                 key={key}
                 variant={selectedPeriod === key ? 'default' : 'ghost'}
                 size="sm"
-                onClick={() => setSelectedPeriod(key as 'weekday' | 'weekend' | 'lunar')}
+                onClick={() => setSelectedPeriod(key as PricingPeriod)}
                 className="text-xs"
               >
                 {label}
@@ -70,18 +75,18 @@ export function PricingComparison({
           <table className="w-full">
             <thead>
               <tr className="border-b">
-                <th className="text-left py-3 font-medium">房型</th>
-                <th className="text-center py-3 font-medium">
+                <th className="py-3 text-left font-medium">房型</th>
+                <th className="py-3 text-center font-medium">
                   <div className="flex items-center justify-center gap-1">
-                    <Users className="w-4 h-4" />
+                    <Users className="h-4 w-4" />
                     人數
                   </div>
                 </th>
-                <th className="text-right py-3 font-medium">總價</th>
+                <th className="py-3 text-right font-medium">總價</th>
                 {showPerPersonPricing && (
-                  <th className="text-right py-3 font-medium">平均每人</th>
+                  <th className="py-3 text-right font-medium">平均每人</th>
                 )}
-                <th className="text-center py-3 font-medium">最佳選擇</th>
+                <th className="py-3 text-center font-medium">最佳選擇</th>
               </tr>
             </thead>
             <tbody>
@@ -103,59 +108,50 @@ export function PricingComparison({
                         <span className="font-medium">{room.name}</span>
                         {isBestValue && (
                           <Badge variant="secondary" className="text-xs">
-                            <TrendingDown className="w-3 h-3 mr-1" />
+                            <TrendingDown className="mr-1 h-3 w-3" />
                             最划算
                           </Badge>
                         )}
                       </div>
                     </td>
 
-                    <td className="text-center py-4">
+                    <td className="py-4 text-center">
                       <Badge variant="outline">
-                        {room.capacity}
-                        {room.maxCapacity && room.maxCapacity > room.capacity &&
-                          `~${room.maxCapacity}`
-                        }人
+                        {formatCapacityRange(room.capacity, room.maxCapacity)}
                       </Badge>
                     </td>
 
-                    <td className="text-right py-4">
+                    <td className="py-4 text-right">
                       <NumberFlow
-                        format={{
-                          style: 'currency',
-                          currency: 'TWD',
-                          trailingZeroDisplay: 'stripIfInteger',
-                        }}
+                        format={PRICE_FORMAT_CONFIG}
                         value={totalPrice}
                         className="font-semibold"
                       />
                     </td>
 
                     {showPerPersonPricing && (
-                      <td className="text-right py-4">
+                      <td className="py-4 text-right">
                         <div className="space-y-1">
                           <NumberFlow
-                            format={{
-                              style: 'currency',
-                              currency: 'TWD',
-                              trailingZeroDisplay: 'stripIfInteger',
-                            }}
+                            format={PRICE_FORMAT_CONFIG}
                             value={pricePerPerson}
                             className="text-muted-foreground text-sm"
                           />
-                          <div className="text-xs text-muted-foreground">每人</div>
+                          <div className="text-muted-foreground text-xs">
+                            每人
+                          </div>
                         </div>
                       </td>
                     )}
 
-                    <td className="text-center py-4">
+                    <td className="py-4 text-center">
                       {isBestValue ? (
                         <Badge className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">
                           推薦
                         </Badge>
                       ) : room.capacity >= 6 ? (
                         <Badge variant="secondary">
-                          <Users className="w-3 h-3 mr-1" />
+                          <Users className="mr-1 h-3 w-3" />
                           大家庭
                         </Badge>
                       ) : (
@@ -170,12 +166,15 @@ export function PricingComparison({
         </div>
 
         {/* Additional Info */}
-        <div className="space-y-3 pt-4 border-t">
-          <h4 className="font-medium text-sm">價格說明</h4>
-          <div className="grid gap-2 text-sm text-muted-foreground">
+        <div className="space-y-3 border-t pt-4">
+          <h4 className="text-sm font-medium">價格說明</h4>
+          <div className="text-muted-foreground grid gap-2 text-sm">
             <div className="flex items-center gap-2">
               <span>•</span>
-              <span>加床費用：平日/假日 ${PRICING_RULES.extraBed.weekday}，過年 ${PRICING_RULES.extraBed.lunar}</span>
+              <span>
+                加床費用：平日/假日 ${PRICING_RULES.extraBed.weekday}，過年 $
+                {PRICING_RULES.extraBed.lunar}
+              </span>
             </div>
             <div className="flex items-center gap-2">
               <span>•</span>
@@ -190,9 +189,7 @@ export function PricingComparison({
 
         {/* CTA */}
         <div className="flex gap-3 pt-2">
-          <Button className="flex-1">
-            立即預訂
-          </Button>
+          <Button className="flex-1">立即預訂</Button>
           <Button variant="outline" className="flex-1">
             聯繫諮詢
           </Button>
@@ -205,26 +202,35 @@ export function PricingComparison({
 // Simple price summary component
 export function PriceSummary({
   roomName,
-  className
+  className,
 }: {
   roomName: string;
   className?: string;
 }) {
-  const room = getPricingComparison().find(r => r.name.includes(roomName));
+  const room = getPricingComparison().find((r) => r.name.includes(roomName));
 
   if (!room) return null;
 
   return (
-    <div className={cn('flex items-center justify-between p-3 bg-muted rounded-lg', className)}>
+    <div
+      className={cn(
+        'bg-muted flex items-center justify-between rounded-lg p-3',
+        className
+      )}
+    >
       <div>
-        <div className="font-medium text-sm">{room.name}</div>
-        <div className="text-xs text-muted-foreground">{room.capacity}人房</div>
+        <div className="text-sm font-medium">{room.name}</div>
+        <div className="text-muted-foreground text-xs">
+          {formatCapacityRange(room.capacity, room.maxCapacity)}
+        </div>
       </div>
       <div className="text-right">
-        <div className="font-semibold">
-          ${room.pricing.weekday.toLocaleString()}
-        </div>
-        <div className="text-xs text-muted-foreground">平日起</div>
+        <NumberFlow
+          format={PRICE_FORMAT_CONFIG}
+          value={room.pricing.weekday}
+          className="text-sm font-semibold"
+        />
+        <div className="text-muted-foreground text-xs">平日起</div>
       </div>
     </div>
   );

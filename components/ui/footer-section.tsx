@@ -9,6 +9,7 @@ import Line from '@/assets/line.svg';
 import WhatsApp from '@/assets/whats-app.svg';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
+import { ScrollReveal, StaggeredReveal } from '@/components/ui/scroll-reveal';
 import { Switch } from '@/components/ui/switch';
 import {
   Tooltip,
@@ -16,7 +17,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { ScrollReveal, StaggeredReveal } from '@/components/ui/scroll-reveal';
 
 import { ClientOnly } from '../web/client-only';
 
@@ -25,7 +25,6 @@ function Footer() {
 
   const isDark = theme === 'dark';
   const handleThemeChange = (bool: boolean) => {
-    console.log(bool);
     setTheme(bool ? 'dark' : 'light');
   };
 
@@ -76,9 +75,44 @@ function Footer() {
             <div>
               <h3 className="mb-4 text-lg font-semibold">聯繫我們</h3>
               <address className="space-y-2 text-sm not-italic">
-                <p>地址: 苗栗縣公館鄉福星村8鄰262-5號</p>
-                <p>電話: +886-910-517-860</p>
-                <p>信箱: support@yunmanchu.com</p>
+                <p className="flex items-center gap-2">
+                  <MapPin className="h-4 w-4" />
+                  <a
+                    href="https://maps.google.com/?q=苗栗縣公館鄉福星村8鄰262-5號"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-primary transition-colors"
+                  >
+                    苗栗縣公館鄉福星村8鄰262-5號
+                  </a>
+                </p>
+                <p className="flex items-center gap-2">
+                  <Phone className="h-4 w-4" />
+                  <a
+                    href="tel:+886910517860"
+                    className="hover:text-primary transition-colors"
+                  >
+                    +886-910-517-860
+                  </a>
+                </p>
+                <p className="flex items-center gap-2">
+                  <svg
+                    className="h-4 w-4"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                    <path d="m22 7-10 5L2 7" />
+                  </svg>
+                  <a
+                    href="mailto:support@yunmanchu.com"
+                    className="hover:text-primary transition-colors"
+                  >
+                    support@yunmanchu.com
+                  </a>
+                </p>
               </address>
             </div>
             <div className="relative">

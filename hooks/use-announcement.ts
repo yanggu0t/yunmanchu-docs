@@ -1,6 +1,7 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
+
 import { client } from '@/lib/client';
 import type { AnnouncementResponse } from '@/types/announcement';
 

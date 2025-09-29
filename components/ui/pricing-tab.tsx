@@ -4,13 +4,12 @@ import * as React from 'react';
 import { motion } from 'framer-motion';
 
 import { cn } from '@/lib/utils';
-import { PriceFrequency } from '@/types/price';
 import { Badge } from '@/components/ui/badge';
 
 interface TabProps {
   text: string;
   selected: boolean;
-  setSelected: (text: string) => void;
+  setSelected: () => void;
   discount?: boolean;
 }
 
@@ -22,21 +21,20 @@ export function Tab({
 }: TabProps) {
   return (
     <button
-      onClick={() => setSelected(text)}
+      onClick={setSelected}
       className={cn(
-        'relative w-fit px-4 py-2 text-sm font-semibold capitalize',
-        'text-foreground transition-colors',
+        'relative w-fit min-w-[70px] px-4 py-2.5 text-sm font-semibold capitalize sm:min-w-[100px] sm:px-6 sm:py-3 sm:text-base',
+        'text-foreground dark:text-foreground transition-all duration-200',
+        'hover:text-primary dark:hover:text-primary active:scale-95',
         discount && 'flex items-center justify-center gap-2.5'
       )}
     >
-      <span className="relative z-10">
-        {PriceFrequency[text as keyof typeof PriceFrequency]}
-      </span>
+      <span className="relative z-10">{text}</span>
       {selected && (
         <motion.span
           layoutId="tab"
           transition={{ type: 'spring', duration: 0.4 }}
-          className="bg-background absolute inset-0 z-0 rounded-full shadow-sm"
+          className="bg-background dark:bg-background border-border dark:border-border absolute inset-0 z-0 rounded-full border shadow-md dark:shadow-lg"
         />
       )}
       {discount && (
