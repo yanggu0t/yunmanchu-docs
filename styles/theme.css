@@ -1,4 +1,23 @@
 @theme {
+  --color-fd-muted: var(--color-fd-muted);
+  --color-fd-popover: var(--color-fd-popover);
+  --color-fd-popover-foreground: var(--color-fd-popover-foreground);
+  --color-fd-card-foreground: var(--color-fd-card-foreground);
+  --color-fd-border: var(--color-fd-border);
+  --color-fd-primary-foreground: var(--color-fd-primary-foreground);
+  --color-fd-secondary-foreground: var(--color-fd-secondary-foreground);
+  --color-fd-accent: var(--color-fd-accent);
+  --color-fd-ring: var(--color-fd-ring);
+  --color-fd-background: var(--color-fd-background);
+  --color-fd-card: var(--color-fd-card);
+  --color-fd-foreground: var(--color-fd-foreground);
+  --color-fd-muted-foreground: var(--color-fd-muted-foreground);
+  --color-fd-secondary: var(--color-fd-secondary);
+  --color-fd-accent-foreground: var(--color-fd-accent-foreground);
+  --color-fd-primary: var(--color-fd-primary);
+}
+
+.light {
   --color-fd-muted: hsl(0, 0%, 96.1%);
   --color-fd-popover: hsl(0, 0%, 100%);
   --color-fd-popover-foreground: hsl(0, 0%, 15.1%);
@@ -8,19 +27,18 @@
   --color-fd-secondary-foreground: hsl(0, 0%, 9%);
   --color-fd-accent: hsl(0, 0%, 94.1%);
   --color-fd-ring: hsl(0, 0%, 63.9%);
-
   --color-fd-background: hsl(0, 0%, 100%);
   --color-fd-card: hsl(0, 0%, 100%);
   --color-fd-foreground: hsl(240, 6%, 25%);
   --color-fd-muted-foreground: hsl(240, 6%, 50%);
   --color-fd-secondary: hsl(240, 6%, 97%);
   --color-fd-accent-foreground: hsl(240, 6%, 25%);
-  --color-fd-primary: hsl(140, 55%, 35%);
+  --color-fd-primary: hsl(139, 15%, 42%);
 }
 
 .dark {
   --color-fd-ring: hsl(100, 100%, 78%);
-  --color-fd-primary: hsl(100, 100%, 78%);
+  --color-fd-primary: hsl(100, 23%, 65%);
   --color-fd-secondary-foreground: hsl(60, 100%, 98%);
   --color-fd-card-foreground: hsl(60, 100%, 98%);
   --color-fd-background: hsl(240, 7%, 11%);

@@ -2,6 +2,7 @@
 @plugin "tailwindcss-animate";
 
 @import './theme.css';
+@import 'fumadocs-ui/css/neutral.css';
 @import 'fumadocs-ui/css/preset.css';
 
 @source '../node_modules/fumadocs-ui/dist/**/*.js';
@@ -133,6 +134,7 @@
 
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
 
     font-family:
       var(--font-geist-sans), var(--font-noto-sans-tc), 'GeistSans',
@@ -142,4 +144,32 @@
 
 button[aria-label='Choose a language'] {
   @apply hidden;
+}
+
+/* Announcement component utilities */
+.announcement-container {
+  /* Ensure smooth layout when announcement appears/disappears */
+  transition: margin-top 0.3s ease-in-out;
+}
+
+.announcement-spacing {
+  /* Add proper spacing when announcement is visible */
+  padding-top: env(--announcement-height, 0px);
+}
+
+/* Gradient animation for announcement banner */
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  animation: gradient 6s ease infinite;
 }

@@ -1,14 +1,6 @@
 'use client';
 
-import {
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-  type ButtonHTMLAttributes,
-  type HTMLAttributes,
-  type ReactNode,
-} from 'react';
+import React from 'react';
 import { useRouter } from 'next/navigation';
 import type { SortedResult } from 'fumadocs-core/server';
 import { useEffectEvent } from 'fumadocs-core/utils/use-effect-event';
@@ -30,7 +22,7 @@ export type SearchLink = [name: string, href: string];
 
 type ReactSortedResult = Omit<SortedResult, 'content'> & {
   external?: boolean;
-  content: ReactNode;
+  content: React.ReactNode;
 };
 
 export interface SharedProps {
@@ -49,8 +41,7 @@ interface SearchDialogProps extends SharedProps {
   isLoading?: boolean;
   hideResults?: boolean;
   results: ReactSortedResult[] | 'empty';
-
-  footer?: ReactNode;
+  footer?: React.ReactNode;
 }
 
 export function SearchDialog({
@@ -64,7 +55,7 @@ export function SearchDialog({
   ...props
 }: SearchDialogProps) {
   const { text } = useI18n();
-  const defaultItems = useMemo<ReactSortedResult[]>(
+  const defaultItems = React.useMemo<ReactSortedResult[]>(
     () =>
       links.map(([name, link]) => ({
         type: 'page',
@@ -137,11 +128,11 @@ function SearchResults({
   items,
   onSelect,
   ...props
-}: HTMLAttributes<HTMLDivElement> & {
+}: React.HTMLAttributes<HTMLDivElement> & {
   items: ReactSortedResult[];
   onSelect?: (value: string) => void;
 }) {
-  const [active, setActive] = useState<string>();
+  const [active, setActive] = React.useState<string>();
   const { text } = useI18n();
   const router = useRouter();
   const sidebar = useSidebar();
@@ -185,7 +176,7 @@ function SearchResults({
     }
   });
 
-  useEffect(() => {
+  React.useEffect(() => {
     window.addEventListener('keydown', onKey);
     return () => {
       window.removeEventListener('keydown', onKey);
@@ -252,14 +243,14 @@ function CommandItem({
   onActiveChange,
   value,
   ...props
-}: ButtonHTMLAttributes<HTMLButtonElement> & {
+}: React.ButtonHTMLAttributes<HTMLButtonElement> & {
   value: string;
   active?: string;
   onActiveChange: (value: string) => void;
 }) {
   return (
     <button
-      ref={useCallback(
+      ref={React.useCallback(
         (element: HTMLButtonElement | null) => {
           if (active === value && element) {
             element.scrollIntoView({
@@ -270,7 +261,7 @@ function CommandItem({
         [active, value]
       )}
       type="button"
-      aria-selected={active === value}
+      aria-current={active === value}
       onPointerMove={() => onActiveChange(value)}
       {...props}
       className={cn(
@@ -288,10 +279,10 @@ export interface TagItem {
   name: string;
   value: string | undefined;
 
-  props?: HTMLAttributes<HTMLButtonElement>;
+  props?: React.HTMLAttributes<HTMLButtonElement>;
 }
 
-export interface TagsListProps extends HTMLAttributes<HTMLDivElement> {
+export interface TagsListProps extends React.HTMLAttributes<HTMLDivElement> {
   tag?: string;
   onTagChange: (tag: string | undefined) => void;
   allowClear?: boolean;

@@ -5,9 +5,7 @@ import {
   AnnouncementResponse,
 } from '@/types/announcement';
 
-import { env } from '../config/env';
-
-const client = new MongoClient(env.MONGO_URI, {
+const client = new MongoClient(process.env.MONGO_URI!, {
   serverApi: {
     version: ServerApiVersion.v1,
     strict: true,
@@ -36,7 +34,7 @@ export async function closeDatabaseConnection() {
 
 export async function getAnnouncement() {
   const res = await collections.announcements.findOne<AnnouncementResponse>({
-    _id: new ObjectId(env.ANNOUNCEMENT_ID),
+    _id: new ObjectId(process.env.ANNOUNCEMENT_ID),
   });
 
   if (!res) {
@@ -48,7 +46,7 @@ export async function getAnnouncement() {
 
 export async function updateAnnouncement(input: AnnouncementRequest) {
   const result = await collections.announcements.updateOne(
-    { _id: new ObjectId(env.ANNOUNCEMENT_ID) },
+    { _id: new ObjectId(process.env.ANNOUNCEMENT_ID) },
     {
       $set: {
         ...input,

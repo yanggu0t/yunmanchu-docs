@@ -6,8 +6,12 @@ export const client = createClient<AppRouter>({
 });
 
 function getBaseUrl() {
-  if (process.env.VERCEL_API_URL) {
-    return `https://${process.env.VERCEL_API_URL}`;
+  if (process.env.NEXT_PUBLIC_VERCEL_API_URL) {
+    return `https://${process.env.NEXT_PUBLIC_VERCEL_API_URL}`;
   }
-  return `http://localhost:3000`;
+  // Use the actual port from the window location in browser
+  if (typeof window !== 'undefined') {
+    return window.location.origin;
+  }
+  return `http://localhost:${process.env.PORT || 3000}`;
 }

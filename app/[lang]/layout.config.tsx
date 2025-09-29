@@ -3,8 +3,6 @@ import {
   BedDouble,
   Calendar,
   CheckCircle,
-  Coffee,
-  Flower,
   Home,
   Info,
   MapPinned,
@@ -70,24 +68,6 @@ export const baseOptions: BaseLayoutProps = {
           text: '交通方式',
           description: '如何抵達蘊慢築民宿',
           url: '/docs/guides/transport',
-        },
-      ],
-    },
-    {
-      type: 'menu',
-      text: '體驗課程',
-      items: [
-        {
-          icon: <Flower />,
-          text: '插花體驗',
-          description: '體驗花藝之美，創造專屬作品',
-          url: '/docs/experiences/floral',
-        },
-        {
-          icon: <Coffee />,
-          text: '品茶體驗',
-          description: '品味東方茶道文化的精髓',
-          url: '/docs/experiences/tea',
         },
       ],
     },

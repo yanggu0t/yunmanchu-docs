@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, type ReactNode } from 'react';
+import React from 'react';
 import { useDocsSearch } from 'fumadocs-core/search/client';
 import { useOnChange } from 'fumadocs-core/utils/use-on-change';
 import { useI18n } from 'fumadocs-ui/provider';
@@ -31,7 +31,7 @@ export interface DefaultSearchDialogProps extends SharedProps {
    */
   delayMs?: number;
 
-  footer?: ReactNode;
+  footer?: React.ReactNode;
 
   /**
    * Allow to clear tag filters
@@ -49,9 +49,9 @@ export default function DefaultSearchDialog({
   type = 'fetch',
   allowClear = false,
   ...props
-}: DefaultSearchDialogProps): ReactNode {
+}: DefaultSearchDialogProps): React.ReactNode {
   const { locale } = useI18n();
-  const [tag, setTag] = useState(defaultTag);
+  const [tag, setTag] = React.useState(defaultTag);
   const { search, setSearch, query } = useDocsSearch(
     type === 'fetch'
       ? {

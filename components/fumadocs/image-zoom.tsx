@@ -1,6 +1,6 @@
 'use client';
 
-import React, { type ImgHTMLAttributes } from 'react';
+import React from 'react';
 import Image, { type ImageProps } from 'next/image';
 import Zoom, { type ControlledProps } from 'react-medium-image-zoom';
 
@@ -13,7 +13,7 @@ export type ImageZoomProps = ImageProps & {
   /**
    * Image props when zoom in
    */
-  zoomInProps?: ImgHTMLAttributes<HTMLImageElement>;
+  zoomInProps?: React.ImgHTMLAttributes<HTMLImageElement>;
 
   /**
    * Props for `react-medium-image-zoom`

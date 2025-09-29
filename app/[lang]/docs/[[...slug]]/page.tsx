@@ -12,12 +12,17 @@ import {
 import { source } from '@/lib/source';
 import { FeatureTable } from '@/components/fumadocs/feature-table';
 import { ImageCarousel } from '@/components/web/image-carousel';
+import { RoomPricing } from '@/components/ui/room-pricing';
+import { RoomFeatures } from '@/components/ui/room-features';
+import { RoomCard, RoomSummary } from '@/components/ui/room-card';
+import { RoomsOverview, RoomSelector } from '@/components/ui/rooms-overview';
+import { PricingComparison, PriceSummary } from '@/components/ui/pricing-comparison';
 
 export default async function Page(props: {
-  params: Promise<{ slug?: string[] }>;
+  params: Promise<{ lang: string; slug?: string[] }>;
 }) {
   const params = await props.params;
-  const page = source.getPage(params.slug);
+  const page = source.getPage(params.slug, params.lang);
   if (!page) notFound();
 
   const MDX = page.data.body;
@@ -35,6 +40,14 @@ export default async function Page(props: {
             Steps,
             FeatureTable,
             ImageCarousel,
+            RoomPricing,
+            RoomFeatures,
+            RoomCard,
+            RoomSummary,
+            RoomsOverview,
+            RoomSelector,
+            PricingComparison,
+            PriceSummary,
           }}
         />
       </DocsBody>
@@ -47,10 +60,10 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata(props: {
-  params: Promise<{ slug?: string[] }>;
+  params: Promise<{ lang: string; slug?: string[] }>;
 }) {
   const params = await props.params;
-  const page = source.getPage(params.slug);
+  const page = source.getPage(params.slug, params.lang);
   if (!page) notFound();
 
   return {

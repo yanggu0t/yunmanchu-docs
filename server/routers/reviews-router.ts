@@ -1,9 +1,8 @@
 import { ReviewsResponse } from '@/types/reviews';
 
-import { env } from '../config/env';
 import { j, publicProcedure } from '../jstack';
 
-const path = `https://featurable.com/api/v1/accounts/${env.FEATURABLE_ACCOUNT_ID}/locations/${env.FEATURABLE_LOCATION_ID}/reviews?apiKey=${env.FEATURABLE_API_KEY}`;
+const path = `https://featurable.com/api/v1/accounts/${process.env.FEATURABLE_ACCOUNT_ID}/locations/${process.env.FEATURABLE_LOCATION_ID}/reviews?apiKey=${process.env.FEATURABLE_API_KEY}`;
 
 export const reviewsRouter = j.router({
   all: publicProcedure.query(async ({ c }) => {
