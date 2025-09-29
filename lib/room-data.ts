@@ -182,7 +182,7 @@ export const PRICING_RULES = {
   periods: {
     weekday: '平日（週日-週四）',
     weekend: '假日（週五-週六）',
-    lunar: '過年期間',
+    lunar: '春節期間',
   },
   extraBed: {
     weekday: 800,

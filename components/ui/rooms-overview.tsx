@@ -124,7 +124,7 @@ export function RoomsOverview({
                   <th className="py-2 text-center">人數</th>
                   <th className="py-2 text-right">平日</th>
                   <th className="py-2 text-right">假日</th>
-                  <th className="py-2 text-right">過年</th>
+                  <th className="py-2 text-right">春節</th>
                   <th className="py-2 text-right">平日/人</th>
                 </tr>
               </thead>

@@ -23,7 +23,7 @@ export type PricingPeriod = 'weekday' | 'weekend' | 'lunar';
 export const PERIOD_LABELS: Record<PricingPeriod, string> = {
   weekday: '平日',
   weekend: '假日',
-  lunar: '過年',
+  lunar: '春節',
 } as const;
 
 // Centralized period colors for styling
@@ -62,20 +62,6 @@ export function formatRoomCapacity(
 export function formatCapacityBadge(capacity: number, roomId?: string): string {
   const isFullHouse = roomId === 'full-house';
   return isFullHouse ? `基本${capacity}人` : `${capacity}人房`;
-}
-
-/**
- * Format max capacity display
- * @param capacity - Base capacity
- * @param maxCapacity - Maximum capacity
- * @returns Formatted max capacity string or null if no additional capacity
- */
-export function formatMaxCapacity(
-  capacity: number,
-  maxCapacity?: number
-): string | null {
-  if (!maxCapacity || maxCapacity <= capacity) return null;
-  return `最多可住${maxCapacity}人`;
 }
 
 /**

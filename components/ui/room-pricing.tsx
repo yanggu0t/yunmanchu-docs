@@ -170,7 +170,7 @@ export function RoomPricing({
             </div>
             {pricing.extraBedPrice && (
               <div className="text-muted-foreground text-sm">
-                加床費用：平日/假日 ${pricing.extraBedPrice.weekday}，過年 $
+                加床費用：平日/假日 ${pricing.extraBedPrice.weekday}，春節 $
                 {pricing.extraBedPrice.lunar}
               </div>
             )}

@@ -80,7 +80,7 @@ export function RoomPricingSection({
           </h3>
           <p className="text-muted-foreground dark:text-muted-foreground text-sm">
             • 平日：週日至週四入住 • 假日：週五、週六及國定假日 •
-            過年：農曆春節期間
+            春節：農曆春節期間
             <br />
             所有房型均含早餐，可依需求加床（需額外收費）
           </p>

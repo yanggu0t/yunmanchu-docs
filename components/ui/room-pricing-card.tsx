@@ -9,7 +9,6 @@ import { ArrowRight } from 'lucide-react';
 import type { RoomDataForPricing } from '@/lib/room-data';
 import {
   cn,
-  formatMaxCapacity,
   formatPeriodLabel,
   PRICE_FORMAT_CONFIG,
   type PricingPeriod,
@@ -70,19 +69,13 @@ export function RoomPricingCard({
               <div className="text-muted-foreground dark:text-muted-foreground text-sm">
                 {formatPeriodLabel(selectedPeriod, '價格')}
               </div>
-              <div className="text-muted-foreground dark:text-muted-foreground text-xs">
-                {formatMaxCapacity(
-                  room.pricing.capacity,
-                  room.pricing.maxCapacity
-                )}
-              </div>
             </div>
 
             <div className="flex items-baseline gap-2">
               <NumberFlow
                 format={PRICE_FORMAT_CONFIG}
                 value={price}
-                className="text-foreground dark:text-foreground text-2xl font-bold sm:text-3xl"
+                className="text-foreground dark:text-foreground text-2xl font-semibold sm:text-3xl"
               />
               <span className="text-muted-foreground dark:text-muted-foreground text-sm">
                 / 晚

@@ -172,7 +172,7 @@ export function PricingComparison({
             <div className="flex items-center gap-2">
               <span>•</span>
               <span>
-                加床費用：平日/假日 ${PRICING_RULES.extraBed.weekday}，過年 $
+                加床費用：平日/假日 ${PRICING_RULES.extraBed.weekday}，春節 $
                 {PRICING_RULES.extraBed.lunar}
               </span>
             </div>
