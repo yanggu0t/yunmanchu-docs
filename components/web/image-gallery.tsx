@@ -6,6 +6,7 @@ import { createPortal } from 'react-dom';
 
 import type { CarouselImage } from '@/lib/images';
 import { cn } from '@/lib/utils';
+import { Skeleton } from '@/components/ui/skeleton';
 
 // ============================================================================
 // Types
@@ -14,6 +15,52 @@ import { cn } from '@/lib/utils';
 interface ImageGalleryProps {
   images: CarouselImage[];
   className?: string;
+}
+
+// ============================================================================
+// GalleryImage - Internal Component for Image with Skeleton
+// ============================================================================
+
+interface GalleryImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+  containerClassName?: string;
+}
+
+function GalleryImage({
+  className,
+  containerClassName,
+  alt,
+  ...props
+}: GalleryImageProps) {
+  const [isLoading, setIsLoading] = useState(true);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    // Check if image is already loaded (e.g. from cache)
+    if (imgRef.current?.complete) {
+      setIsLoading(false);
+    }
+  }, []);
+
+  return (
+    <div className={cn('relative h-full w-full', containerClassName)}>
+      {isLoading && (
+        <Skeleton className="absolute inset-0 h-full w-full rounded-2xl bg-neutral-200 dark:bg-neutral-800" />
+      )}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        ref={imgRef}
+        alt={alt}
+        className={cn(
+          'transition-opacity duration-300',
+          isLoading ? 'opacity-0' : 'opacity-100',
+          className
+        )}
+        onLoad={() => setIsLoading(false)}
+        onError={() => setIsLoading(false)}
+        {...props}
+      />
+    </div>
+  );
 }
 
 // ============================================================================
@@ -101,13 +148,13 @@ export function ImageGallery({ images, className }: ImageGalleryProps) {
             >
               {/* Bento-style card - clean rounded corners, soft shadow */}
               <div className="relative flex h-48 w-auto items-center justify-center overflow-hidden rounded-2xl shadow-lg ring-1 shadow-black/5 ring-black/5 transition-all duration-300 ease-out hover:shadow-xl hover:shadow-black/10 md:h-56 dark:ring-white/10">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <GalleryImage
                   src={image.src}
                   alt={image.alt}
                   className="h-full w-auto max-w-none object-cover"
                   loading="lazy"
                   draggable={false}
+                  containerClassName="flex items-center justify-center"
                 />
               </div>
             </button>
@@ -316,13 +363,15 @@ function ImageGalleryLightbox({
             style={{ scrollSnapAlign: 'center' }}
           >
             {/* Native img for correct click target size */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={image.src}
-              alt={image.alt}
-              className="max-h-[85vh] max-w-[90vw] cursor-default object-contain shadow-2xl drop-shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
-            />
+            <div className="relative flex h-full w-full items-center justify-center">
+              <GalleryImage
+                src={image.src}
+                alt={image.alt}
+                className="max-h-[85vh] max-w-[90vw] cursor-default object-contain shadow-2xl drop-shadow-2xl"
+                onClick={(e) => e.stopPropagation()}
+                containerClassName="flex items-center justify-center"
+              />
+            </div>
           </div>
         ))}
       </div>
