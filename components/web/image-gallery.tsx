@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { createPortal } from 'react-dom';
 
@@ -310,7 +309,7 @@ function ImageGalleryLightbox({
           msOverflowStyle: 'none',
         }}
       >
-        {images.map((image, index) => (
+        {images.map((image) => (
           <div
             key={image.key}
             className="flex h-full w-screen flex-shrink-0 items-center justify-center p-4 md:p-16"
