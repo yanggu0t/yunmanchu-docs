@@ -1,4 +1,4 @@
 {
   "title": "住宿指南",
-  "pages": ["check_in", "booking", "transport"]
+  "pages": ["check_in", "booking", "transport", "faq"]
 }
